@@ -24,3 +24,20 @@ def my_transpose(arr)
     end
     new_arr
 end
+
+def pick_stocks(stocks)
+    profit = 0
+    dates = []
+    stocks.each_with_index do |price, buy_day|
+        ((buy_day + 1)...stocks.length).each do |sell_day|
+            buy = stocks[buy_day]
+            sell = stocks[sell_day]
+            if sell - buy > profit
+                profit = sell - buy
+                dates[0] = buy_day
+                dates[1] = sell_day
+            end
+        end
+    end
+    dates
+end

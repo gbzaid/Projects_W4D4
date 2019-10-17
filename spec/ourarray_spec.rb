@@ -49,3 +49,25 @@ describe "my_transpose" do
         expect(my_transpose(matrix)).not_to be(matrix)
     end
 end
+
+describe "pick_stocks" do
+
+    let(:stocks) { [23, 45, 21, 5, 96, 12, 66, 95]}
+
+    it "should accept an array" do 
+        expect { pick_stocks(stocks) }.not_to raise_error
+    end
+
+    it "should return a pair of elements" do
+        expect( pick_stocks(stocks).length).to eq(2)
+    end
+
+    it "should return the best days to buy/sell" do
+        expect(pick_stocks(stocks)).to eq([3,4])
+    end
+
+    it "should return an empty array if no profit is possible" do
+        falling_stocks = stocks.sort.reverse
+        expect(pick_stocks(falling_stocks)).to be_empty
+    end    
+end
