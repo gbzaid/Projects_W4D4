@@ -33,11 +33,28 @@ describe Hanoi do
         end
 
         it "should raise an error if you try to place a bigger disc on a smaller one" do 
-
+            game.move(0,1)
+            expect { game.move(0,1)}.to raise_error(StandardError)
         end
 
         it "should raise an error if you try to remove a disc from an empty pile" do
             expect { game.move(1,2) }.to raise_error(StandardError)
         end
+    end
+
+    describe "#won?" do 
+        context "when either pile2 or pile3 is fully stacked" do
+            it "should return true" do
+                game.piles[1] = game.piles[0]
+                game.piles[0] = []
+                expect(game.won?).to be true
+            end
+        end 
+        context "when neither pile2 or pile3 is fully stacked" do
+            it "should return false" do
+                expect(game.won?).to be false
+            end
+        end
+        
     end
 end
